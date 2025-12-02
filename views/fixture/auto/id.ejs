@@ -1,4 +1,4 @@
-<%- include("../partials/header") -%>
+<%- include("../../partials/header") -%>
     <header class="jumbotron">
         <h1>Fixtures</h1>
         <div class="d-flex justify-content-start">
@@ -12,6 +12,7 @@
             <% if(matchWeeks){ %>
                 <div class="position-absolute mt-2">
                     <select name="matchWeek" id="matchWeek" class="h2 form-control">
+                        <option value="<%= thisMatchWeek._id%>">Matchweek <%= thisMatchWeek.order %></option>
                         <% matchWeeks.forEach((matchWeek)=>{ %>
                             <option value="<%= matchWeek._id%>">Matchweek <%= matchWeek.order %></option>
                         <% }) %>
@@ -78,4 +79,4 @@
         </main>
     </div>
 
-<%- include("../partials/footer") -%>
+<%- include("../../partials/footer") -%>

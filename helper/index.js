@@ -1,9 +1,12 @@
 const mongoose      =   require("mongoose")
     ,   db          =   require("../models");
 const Season        =   require("../models/season")
+const Team          =   require("../models/team")
 const Result        =   require("../models/result")
 const Fixture       =   require("../models/fixture")
+const User          =   require("../models/user");
 const moment        =   require("moment");
+const Matchweek     = require("../models/matchWeek");
 
 
     module.exports = {
@@ -61,12 +64,7 @@ const moment        =   require("moment");
         },
 
         testGround: async (req, res) => {
-            const season2024 = await Season.create({
-                name: "2024",
-                start: moment("2024-02-06").startOf("day"), 
-                end: moment("2024-12-31").endOf("day"),
-
-            })
-            res.json(season2024);
+            const matchWeeks = await Matchweek.find();
+            res.json({matchWeeks});
         }
     }

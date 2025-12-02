@@ -6,12 +6,29 @@ class AddMatch {
         this.homeTeamId = homeTeamId;
         this.awayTeamScore = awayTeamScore;
         this.awayTeamId = awayTeamId;
-        console.log(homeTeamScore, homeTeamId, awayTeamScore, awayTeamId)
     }
     
-    async getTeams (){
-        this.homeTeam = await Team.findById({_id: this.homeTeamId});
-        this.awayTeam = await Team.findById({_id: this.awayTeamId});
+    getTeams (){
+        this.homeTeam = {
+            matchPlayed,
+            win,
+            draw,
+            lose,
+            goalsFor,
+            goalsAgainst,
+            goalDifference,
+            points,
+        }
+        this.awayTeam = {
+            matchPlayed,
+            win,
+            draw,
+            lose,
+            goalsFor,
+            goalsAgainst,
+            goalDifference,
+            points,
+        }
     }
 
     matchPlayed(){
@@ -77,8 +94,8 @@ class AddMatch {
         this.goalsAgainst();
         this.goalDifference();
         this.points();
-        const homeTeam = await Team.findByIdAndUpdate({_id: this.homeTeamId}, this.homeTeam, {new: true});
-        const awayTeam = await Team.findByIdAndUpdate({_id: this.awayTeamId}, this.awayTeam, {new: true});
+        // const homeTeam = await Team.findByIdAndUpdate({_id: this.homeTeamId}, this.homeTeam, {new: true});
+        // const awayTeam = await Team.findByIdAndUpdate({_id: this.awayTeamId}, this.awayTeam, {new: true});
         console.log(homeTeam, awayTeam)
         return {homeTeam, awayTeam};
     }

@@ -1,0 +1,18 @@
+<%- include("../partials/header") -%>
+    <header class="jumbotron">
+        <h1>Login</h1>
+    </header>
+    <article class="container">
+        <form action="/admin/login" method="POST">
+            <div>
+                <label for="">Username</label>
+                <input type="text" name="username" claas="form-control">
+            </div>
+            <div>
+                <label for="">Password</label>
+                <input type="password" name="password" claas="form-control">
+            </div>
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </form>
+    </article>
+<%- include("../partials/footer") -%>

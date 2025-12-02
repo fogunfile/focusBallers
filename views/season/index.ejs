@@ -1,14 +1,14 @@
 <%- include("../partials/header") -%>
     <header class="jumbotron">
-        <h1>All Teams</h1>
-        <a href="/team/new" class="btn btn-primary">Create a New Team</a>
+        <h1>All Seasons</h1>
+        <a href="/season/new" class="btn btn-primary">Create a New Season</a>
     </header>
     <div class="container">
         <ol>
-            <% teams.forEach((team)=> { %>
+            <% seasons.forEach((season)=> { %>
                 <h2>
                     <li>
-                        <%= team.name %><a href="/team/<%= team._id %>/edit" class="btn btn-md btn-outline-primary mx-3">Edit</a>
+                        <%= season.name %> <a href="/season/<%= season._id %>" class="btn btn-md btn-outline-primary">Edit</a>
                     </li>
                 </h2>
             <% }) %>

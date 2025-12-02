@@ -1,12 +1,25 @@
 <%- include("partials/header") -%>
+    <div class="table">
         <header>
             <div class="jumbotron">
-                <h1>Focus Ballers League</h1>
+                <h1 class="pl-3 text-center">The Academy Championship</h1>
+                <div class="d-flex justify-content-center mt-3">
+                    <a href="/fixture" class="mx-3">Fixtures</a>
+                    <a href="/result" class="mx-3">Results</a>
+                </div>
+                <aside class="text-left col-md-3">
+                    <label class="">Season:</label>
+                    <select name="season" id="" class="form-control">
+                        <option value="<%= currentSeason._id %>"><%= currentSeason.name %></option>
+                        <% seasons.forEach((season)=>{ %>
+                            <option value="<%= season._id %>"><%= season.name %></option>
+                        <% }) %>
+                    </select>
+                </aside>
             </div>
         </header>
         <div class="container">
             <main>
-                <br>
                 <table id="standings">
                     <thead>
                         <tr>
@@ -22,25 +35,12 @@
                             <td>Pts</td>
                         </tr>
                     </thead>
-                    <tbody>
-                        <% teams.forEach((team, n)=>{ %>
-                            <tr>
-                                <td><%= n+1 %></td>
-                                <td><%= team.name %></td>
-                                <td><%= team.matchPlayed %></td>
-                                <td><%= team.win %></td>
-                                <td><%= team.draw %></td>
-                                <td><%= team.lose %></td>
-                                <td><%= team.goalsFor %></td>
-                                <td><%= team.goalsAgainst %></td>
-                                <td><%= team.goalDifference %></td>
-                                <td><%= team.points %></td>
-                            </tr>
-                        <% }) %>
+                    <tbody id="tbody">
                     </tbody>
                 </table>
             </main>
             <br>
         </div>
+    </div>
 
 <%- include("partials/footer") -%>

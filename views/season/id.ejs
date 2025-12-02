@@ -1,0 +1,16 @@
+<%- include("../partials/header") -%>
+    <header class="jumbotron">
+        <h1><%= season.name %> Season</h1>
+    </header>
+    <div class="container">
+        <div class="form-group">
+            <label class="font-weight-bold">Description:</label>
+            <p><%= season.description %></p>
+            <label class="font-weight-bold">Start:</label>
+            <p><%= moment(season.start).format("DD/MM/YYYY") %></p>
+            <label class="font-weight-bold">End:</label>
+            <p><%= moment(season.end).format("DD/MM/YYYY") %></p>
+        </div>
+    </div>
+
+<%- include("../partials/footer") -%>

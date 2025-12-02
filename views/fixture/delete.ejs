@@ -1,0 +1,18 @@
+<%- include("../partials/header") -%>
+    <header class="jumbotron">
+        <h1>Auto Delete Fixtures</h1>
+        <!-- <a href="/fixture/new" class="btn btn-primary">Create a New Fixture</a> -->
+        <!-- <a href="/fixture/auto" class="btn btn-primary">Auto Generate Fixtures for the Week</a> -->
+    </header>
+    <div class="container">
+        <form action="/fixture/auto/<%= matchWeek._id %>/?_method=DELETE" method="POST">
+            <h2>Are you sure?</h2>
+            <div>
+                <p>Do you want to delete <bold>matchweek <%= matchWeek.order %></bold> and corresponding fixtures?</p>
+            </div>
+            <input type="submit" value="Yes Delete" class="btn btn-danger">
+            <a href="/fixture" class="btn btn-primary">No</a>
+        </form>
+    </div>
+
+<%- include("../partials/footer") -%>

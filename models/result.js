@@ -14,6 +14,22 @@ const resultSchema = mongoose.Schema({
         type: Number,
         required: true,
     },
+    addPointsHomeTeam: {
+        type: Number,
+        default: 0,
+    },
+    addPointsAwayTeam: {
+        type: Number,
+        default: 0,
+    },
+    isWalkOverHomeTeam: {
+        type: Boolean,
+        default: false,
+    },
+    isWalkOverAwayTeam: {
+        type: Boolean,
+        default: false,
+    },
     info: {
         type: String
     },

@@ -13,6 +13,7 @@ const seasonSchema = new mongoose.Schema({
 
     start: {
         type: Date,
+        default: Date.now()
     },
 
     end: {

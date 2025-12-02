@@ -15,6 +15,10 @@ const teamSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Person"
     },
+    season: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Season"
+    },
     date: {
         type: Date,
         default: Date.now

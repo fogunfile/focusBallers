@@ -5,25 +5,20 @@ const AddMatch = require("../utils/addMatch");
 const RemoveMatch = require("../utils/removeMatch");
 const deleteFixture = require("./fixture").deleteFixture
 const moment = require("moment");
+const CurrentSeason = require("../utils/currentSeason");
 
 module.exports = {
     readResults: async (req, res) => {
-        const results = await Result.find().sort({date: -1}).populate({path: "fixture", populate: {path: "homeTeam awayTeam"}});
-
-        // const ids = [];
-        // for(let result of results){
-        //     if(result.date > moment("2023-03-13") && result.date < moment("2023-03-16")){
-        //         // result.date = moment("2023-03-14 16:00");
-        //         // await result.save();
-        //         console.log(result._id);
-        //         ids.push(result._id)
-        //     }
-        // }
-        // console.log(ids)
-        // for(let j=0; j<ids.length; j++){
-        //     const oneResult = await Result.findByIdAndUpdate({_id: ids[j]}, {date: moment("2023-03-14 16:00")}, {new: true});
-        //     // console.log(oneResult);
-        // }
+        const currentSeason = await CurrentSeason();
+        const fixtures = await Fixture.find({season: currentSeason._id});
+        const results = await Result.find({fixture: {$in: fixtures}}).populate({path: "fixture", populate: {path: "homeTeam awayTeam"}}).sort({"fixture.date": -1});
+        results.sort((a,b)=>{
+            if(b.fixture.date > a.fixture.date){
+                return 1;
+            } else if (b.fixture.date < a.fixture.date){
+                return -1;
+            }
+        });
         res.render("result/", {results});
     },
     readOneResult: async (req, res) => {
@@ -51,9 +46,9 @@ module.exports = {
             console.log(req.body);
             const thisResult = await Result.create(req.body);
             const newResult = await Result.findById({_id: thisResult._id}).populate({path: "fixture", populate: {path: "homeTeam awayTeam"}});
-            const thisMatch = new AddMatch(newResult.homeTeamScore, newResult.fixture.homeTeam._id, newResult.awayTeamScore, newResult.fixture.awayTeam._id);
-            thisMatch.executeMatch();
-            res.redirect("/result")
+            // const thisMatch = new AddMatch(newResult.homeTeamScore, newResult.fixture.homeTeam._id, newResult.awayTeamScore, newResult.fixture.awayTeam._id);
+            // thisMatch.executeMatch();
+            res.redirect("/fixture")
         } catch (e) {
             console.log(e)
         }
@@ -61,7 +56,7 @@ module.exports = {
     toUpdateResult: async (req, res) => {
         try {
             const resultId = req.params.id
-            const result = await Result.findById({_id: resultId}).populate({path: "Fixture", populate: {path: "homeTeam awayTeam"}});
+            const result = await Result.findById({_id: resultId}).populate({path: "fixture", populate: {path: "homeTeam awayTeam"}});
             res.render("result/edit", {result})
         } catch (e) {
             console.log(e);
@@ -70,7 +65,9 @@ module.exports = {
     updateResult: async (req, res) => {
         try {
             console.log(req.body);
-
+            const resultUpdated = await Result.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true});
+            console.log(resultUpdated);
+            res.redirect(`/result/${req.params.id}`)
 
             // const thisMatch = new RemoveMatch(3, teamA._id, 2, teamB._id);
             // const executedMatch = await thisMatch.executeMatch()

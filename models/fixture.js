@@ -13,6 +13,10 @@ const fixtureSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Season"
     },
+    matchWeek: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "MatchWeek"
+    },
     info: {
         type: String,
     },

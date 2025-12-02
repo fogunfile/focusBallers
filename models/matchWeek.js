@@ -2,13 +2,14 @@ const       mongoose        =   require("mongoose");
 const       db              =   require("./index");
 
 
-const seasonSchema = new mongoose.Schema({
-    name: {
-        type: String,
+const matchWeekSchema = new mongoose.Schema({
+    order: {
+        type: Number,
     },
 
     season: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Season"
     },
 
     start: {
@@ -25,4 +26,4 @@ const seasonSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model("Season", seasonSchema);
+module.exports = mongoose.model("MatchWeek", matchWeekSchema);
