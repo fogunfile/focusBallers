@@ -15,7 +15,10 @@ module.exports = {
         } else {
             season = await CurrentSeason();
         }
-        const teams = await Team.find({season: season._id}).sort({name: 1});
+        let seasonId;
+        season ? seasonId = season._id : seasonId = null;
+        const teams = await Team.find({season: seasonId}).sort({name: 1});
+        teams ? teams : teams = [];
         res.render("team/", {teams});
     },
     toCreateTeam: async (req, res) => {

@@ -6,15 +6,25 @@
                 <div class="d-flex justify-content-center mt-3">
                     <a href="/fixture" class="mx-3">Fixtures</a>
                     <a href="/result" class="mx-3">Results</a>
+                    <a href="/team" class="mx-3">Teams</a>
                 </div>
                 <aside class="text-left col-md-3">
                     <label class="">Season:</label>
                     <select name="season" id="" class="form-control">
-                        <option value="<%= currentSeason._id %>"><%= currentSeason.name %></option>
+                        <% if(currentSeason) { %>
+                            <option value="<%= currentSeason._id %>"><%= currentSeason.name %></option>
+                        <% } else { %>
+                            <option value="">No Current Season</option>
+                        <% } %>
                         <% seasons.forEach((season)=>{ %>
                             <option value="<%= season._id %>"><%= season.name %></option>
                         <% }) %>
                     </select>
+                    <div class="mt-2">
+                        <% if(!currentSeason) { %>
+                            <a href="/season">Create new season</a>
+                        <% } %>
+                    </div>
                 </aside>
             </div>
         </header>

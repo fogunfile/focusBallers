@@ -11,6 +11,9 @@ const data = async (matchWeekId) => {
     const currentSeason = await CurrentSeason();
     if(!matchWeekId){
         thisMatchWeek = await MatchWeek.findOne({season: currentSeason._id}).sort({order: -1}).limit(1);
+        if(!thisMatchWeek){
+            thisMatchWeek = await MatchWeek.create({order: 0, season: currentSeason._id});
+        }
     } else {
         thisMatchWeek = await MatchWeek.findById({_id: matchWeekId});
     }

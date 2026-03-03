@@ -13,8 +13,12 @@ router.get("/", async (req, res)=> {
     console.log("req.session", req.session)
     const currentSeason = await CurrentSeason();
     const seasons = await Season.find();
-    const teams = await Team.find({season: currentSeason._id})
-    res.render("index", {teams, seasons, currentSeason});
+    if(currentSeason === null){
+        res.render("index", {teams: [], seasons, currentSeason: null});
+    } else {
+        const teams = await Team.find({season: currentSeason._id});
+        res.render("index", {teams, seasons, currentSeason});
+    }
 })
 
 router.get("/login", async (req, res)=> {
